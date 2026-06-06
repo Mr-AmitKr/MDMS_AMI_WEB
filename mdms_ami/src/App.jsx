@@ -1,16 +1,25 @@
 import React, { useState } from "react";
+import { Routes, Route } from "react-router-dom";
 import { HiMenuAlt3 } from "react-icons/hi";
 import Leftnavigation from "./Components/Leftnavigation";
 import Companyicon from "./Components/Companyicon";
 import Topnavigation from "./Components/Topnavigation";
 import Dashboard from "./Components/Dashboard/Dashboard";
+import MeterMaster from "./Components/SubMenu/MeterManagement/MeterMaster";
+import MeterAutoRegistration from "./Components/SubMenu/MeterManagement/MeterAutoRegistration";
+import ConfigConnDisc from "./Components/SubMenu/MeterManagement/ConfigConnDisc";
+import MeterConfig from "./Components/SubMenu/MeterManagement/MeterConfig";
+import MeterHealthCheck from "./Components/SubMenu/MeterManagement/MeterHealthCheckup";
+import TimeSyncronize from "./Components/SubMenu/MeterManagement/TimeSyncronize";
+import NodeStatusMonitoring from "./Components/SubMenu/MeterManagement/NodeStatusMonitoring";
+import RemoteFirmwareUpdate from "./Components/SubMenu/MeterManagement/RemoteFirmwareUpdate";
+
 
 const App = () => {
   const [sidebarOpen, setSidebarOpen] = useState(false);
 
   return (
     <div className="min-h-screen bg-black relative">
-
       {/* Background */}
       <div
         className="absolute inset-0 z-0"
@@ -26,7 +35,6 @@ const App = () => {
       />
 
       <div className="relative z-10">
-
         {/* Mobile Header */}
         <div className="lg:hidden flex items-center justify-between p-4 border-b border-gray-800">
           <button
@@ -36,9 +44,7 @@ const App = () => {
             <HiMenuAlt3 />
           </button>
 
-          <h1 className="text-white font-semibold text-lg">
-            MDMS
-          </h1>
+          <h1 className="text-white font-semibold text-lg">MDMS</h1>
         </div>
 
         {/* Sidebar Overlay */}
@@ -52,7 +58,7 @@ const App = () => {
         {/* Sidebar */}
         <div
           className={`
-            fixed top-0 left-0 h-full w-72 bg-black border-r border-gray-800
+            fixed top-0 left-0 h-full w-72 bg-black/30 border-r border-gray-800
             transform transition-transform duration-300 z-50
             ${sidebarOpen ? "translate-x-0" : "-translate-x-full"}
             lg:translate-x-0
@@ -60,30 +66,67 @@ const App = () => {
         >
           <Companyicon />
 
-          <Leftnavigation
-  closeSidebar={() => setSidebarOpen(false)}
-/>
+          <Leftnavigation closeSidebar={() => setSidebarOpen(false)} />
         </div>
 
-        {/* Main Content */}
-      <div
-  className="
+        <div
+          className="
   lg:ml-72
   min-h-screen
   overflow-y-auto
   "
->
-
+        >
           <div className="fixed top-0 left-0 lg:left-64 right-0 z-50">
-  <Topnavigation />
-</div>
+            <Topnavigation />
+          </div>
 
-         <div className="pt-20">
-  <Dashboard />
-</div>
+          <div className="pt-20">
+            <Routes>
+  <Route path="/" element={<Dashboard />} />
 
+  <Route
+    path="/meter-management/meter-master"
+    element={<MeterMaster />}
+  />
+
+  <Route
+    path="/meter-management/meter-auto-registration"
+    element={<MeterAutoRegistration />}
+  />
+
+  <Route
+    path="/meter-management/configure-connect-disconnect"
+    element={<ConfigConnDisc />}
+  />  
+
+  <Route
+    path="/meter-management/meter-configuration"
+    element={<MeterConfig />}
+  />
+
+  <Route
+    path="/meter-management/meter-health-check"
+    element={<MeterHealthCheck />}
+  />
+
+  <Route
+    path="/meter-management/time-synchronization"
+    element={<TimeSyncronize />}
+  />
+
+  <Route
+    path="/meter-management/node-status-monitoring"
+    element={<NodeStatusMonitoring />}
+  />
+
+  <Route
+    path="/meter-management/remote-firmware-update"
+    element={<RemoteFirmwareUpdate />}
+  />
+
+</Routes>
+          </div>
         </div>
-
       </div>
     </div>
   );

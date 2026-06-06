@@ -1,8 +1,10 @@
-import React from 'react'
+import React, { useState } from "react";
+import { IoChevronDown } from "react-icons/io5";
 
-const AlarmDetailsTableData = () => {
+const AlarmDetailsTableData = ({ timeFrame }) => {
     const [openRow, setOpenRow] = useState(null);
-    const tableData = [
+    const tableData = { 
+      Hourly: [
       {
         id: 1,
         hour: 13,
@@ -85,7 +87,91 @@ const AlarmDetailsTableData = () => {
         },
       ],
     },
-  ] ;
+  ],
+        Daily: [
+    {
+      id: 1,
+      label: "Monday",
+      alarms: [
+        {
+          alarmId: "D001",
+          alarmType: "Meter Failure",
+          alarmCount: 12,
+          dateTime: "26-05-2026",
+        },
+      ],
+    },
+    {
+      id: 2,
+      label: "Tuesday",
+      alarms: [
+        {
+          alarmId: "D002",
+          alarmType: "Power Failure",
+          alarmCount: 8,
+          dateTime: "27-05-2026",
+        },
+      ],
+    },
+  ],
+
+  Weekly: [
+    {
+      id: 1,
+      label: "Week 21",
+      alarms: [
+        {
+          alarmId: "W001",
+          alarmType: "Communication Loss",
+          alarmCount: 25,
+          dateTime: "Week 21",
+        },
+      ],
+    },
+  ],
+
+  Monthly: [
+    {
+      id: 1,
+      label: "May",
+      alarms: [
+        {
+          alarmId: "M001",
+          alarmType: "Meter Bypass",
+          alarmCount: 85,
+          dateTime: "May 2026",
+        },
+      ],
+    },
+  ],
+
+  Yearly: [
+    {
+      id: 1,
+      label: "2026",
+      alarms: [
+        {
+          alarmId: "Y001",
+          alarmType: "Voltage Missing",
+          alarmCount: 450,
+          dateTime: "2026",
+        },
+      ],
+    },
+  ]
+    };
+     const currentData = tableData[timeFrame] || [];
+
+  const columnHeading =
+    timeFrame === "Hourly"
+      ? "Hour"
+      : timeFrame === "Daily"
+      ? "Day"
+      : timeFrame === "Weekly"
+      ? "Week"
+      : timeFrame === "Monthly"
+      ? "Month"
+      : "Year";
 
   return (
     <div>
@@ -94,14 +180,16 @@ const AlarmDetailsTableData = () => {
           <tr className="bg-[#1e2433]">
             <th className="px-4 py-3 text-left text-gray-400">S.No</th>
 
-            <th className="px-4 py-3 text-left text-gray-400">Hour</th>
+             <th className="px-4 py-3 text-left text-gray-400">
+              {columnHeading}
+            </th>
 
             <th className="px-4 py-3 text-left text-gray-400">Alarm Count</th>
           </tr>
         </thead>
 
         <tbody>
-          {tableData.map((row) => (
+          {currentData.map((row) => (
             <React.Fragment key={row.id}>
               <tr
                 onClick={() => setOpenRow(openRow === row.id ? null : row.id)}
@@ -117,7 +205,8 @@ const AlarmDetailsTableData = () => {
 
                 <td className="px-4 py-3 text-gray-300">
                   <span className="inline-flex items-center gap-2">
-                    {row.hour}
+                       {row.label || row.hour}
+
 
                     <IoChevronDown
                       className={`w-4 h-4 text-gray-400 transition-transform duration-300 ${

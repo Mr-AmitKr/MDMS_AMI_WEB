@@ -5,18 +5,19 @@ import AlarmDetailsTable from "../AlarmCards/AlarmDetailsTable";
 import AlarmCountByHour from "../AlarmCards/AlarmCountByHour";
 
 const AlarmDetails = () => {
-  const [period, setPeriod] = useState("Hourly");
+  const [timeFrame, setTimeFrame] = useState("Hourly");
 
   return (
     <div className="space-y-6">
+
       <div className="flex items-center justify-between">
         <h3 className="text-white text-lg">
           Alarm Details
         </h3>
 
         <select
-          value={period}
-          onChange={(e) => setPeriod(e.target.value)}
+          value={timeFrame}
+          onChange={(e) => setTimeFrame(e.target.value)}
           className="
             bg-[#2a2f3a]
             text-white
@@ -26,27 +27,24 @@ const AlarmDetails = () => {
             py-2
             border
             border-[#3d4450]
-            outline-none
           "
         >
-          <option>Hourly</option>
-          <option>Daily</option>
-          <option>Weekly</option>
-          <option>Monthly</option>
-          <option>Yearly</option>
+          <option value="Hourly">Hourly</option>
+          <option value="Daily">Daily</option>
+          <option value="Weekly">Weekly</option>
+          <option value="Monthly">Monthly</option>
+          <option value="Yearly">Yearly</option>
         </select>
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
-        <AlarmSummaryPie period={period} />
-        <AlarmDistributionPie period={period} />
+        <AlarmSummaryPie period={timeFrame} />
+        <AlarmDistributionPie period={timeFrame} />
       </div>
 
-      <AlarmDetailsTable period={period} />
+      <AlarmDetailsTable timeFrame={timeFrame} />
 
-      <div className="h-[250px]">
-        <AlarmCountByHour period={period} />
-      </div>
+      <AlarmCountByHour period={timeFrame} />
     </div>
   );
 };

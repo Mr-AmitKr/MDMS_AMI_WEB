@@ -30,9 +30,9 @@ return "opacity-80 group-hover:opacity-100 transition-all duration-300 group-hov
   left-0
   z-40
   h-20
-  bg-black/90
+  bg-black/40
   backdrop-blur-md
-  border-b
+
   border-gray-700
   flex
   items-center
