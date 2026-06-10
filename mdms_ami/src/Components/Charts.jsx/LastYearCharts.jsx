@@ -15,7 +15,7 @@ const LastYearCharts = () => {
   if (!active || !payload?.length) return null;
 
   return (
-    <div className="min-w-[180px] rounded-2xl border border-slate-700/50 bg-slate-900/95 backdrop-blur-md shadow-2xl px-4 py-3">
+    <div className="min-w-[180px]  mt-[-40px] rounded-2xl border border-slate-700/50 bg-slate-900/95 backdrop-blur-md shadow-2xl px-4 py-3">
       <div className="flex items-center justify-between mb-8">
         <span className="text-slate-400 text-xs font-medium">
           Month
@@ -63,7 +63,7 @@ const LastYearCharts = () => {
   ];
 
   return (
-    <div className="w-full h-[140px] mt-[-130px]">
+    <div className="w-60 h-[140px] mt-[-130px]">
       <ResponsiveContainer width="100%" height="100%">
         <BarChart data={chartDetails}>
           <XAxis

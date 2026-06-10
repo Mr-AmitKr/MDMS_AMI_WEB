@@ -1,4 +1,5 @@
-import React from 'react'
+/* eslint-disable no-unused-vars */
+
 import { CiSearch } from "react-icons/ci";
 import { RiDashboard3Line } from "react-icons/ri";
 import { VscTools } from "react-icons/vsc";
@@ -19,7 +20,7 @@ const Leftnavigation = ({ closeSidebar }) => {
   {
   name: "Dashboard",
   icon: <RiDashboard3Line />, 
-  path: "/"
+  path:"/Dashboard/Dashboard"
 },
   {
     name: "Meter Management",
@@ -27,8 +28,8 @@ const Leftnavigation = ({ closeSidebar }) => {
     subMenus: [{"name": "Meter Master"
     , "path": "/meter-management/meter-master"
     }
-      ,{ "name": "Meter Auto Registration",
-      "path": "/meter-management/meter-auto-registration" }
+      ,{ "name": "Meter Registration Details",
+      "path": "/meter-management/meter-registration-details" }
       ,
       {"name": "Config Connect/Disc..",
      "path": "/meter-management/configure-connect-disconnect" },
@@ -39,11 +40,8 @@ const Leftnavigation = ({ closeSidebar }) => {
       {"name": "Meter Health Check", 
       "path": "/meter-management/meter-health-check" },
 
-      {"name": "Time Syncronize", 
-       "path": "/meter-management/time-synchronization" },
-
-      {"name": "Node Status Monitoring",
-       "path": "/meter-management/node-status-monitoring" },
+      {"name": "Meter Groups",
+       "path": "/meter-management/Meter_Groups" },
 
       {"name": "Remote Firmware Update", 
        "path": "/meter-management/remote-firmware-update" },
@@ -118,12 +116,13 @@ const [openMenu, setOpenMenu] = useState(null);
             pr-10
             text-white
             bg-transparent
-            border border-gray-600
+            border border-emerald-900
             rounded-xl
             shadow-lg
             focus:outline-none
             focus:ring-2
-            focus:ring-gray-500
+            focus:ring-emerald-900 
+            focus:shadow-emerald-300 focus:shadow-[0_0_10px]
           "
         />
 
@@ -162,8 +161,8 @@ const [openMenu, setOpenMenu] = useState(null);
   }}
 className={`flex items-center gap-3 px-4 py-3 rounded-xl transition-all ${
   location.pathname === menu.path
-    ? "bg-gray-700 text-white"
-    : "text-gray-400 hover:bg-gray-800 hover:text-white"
+    ? "bg-emerald-600 text-white"
+    : "text-gray-400 hover:bg-emerald-900 hover:text-white"
 }`}>
   <span className="text-xl">{menu.icon}</span>
   <span className="text-sm font-medium">
@@ -187,8 +186,8 @@ className={`flex items-center gap-3 px-4 py-3 rounded-xl transition-all ${
   transition-all
   ${
     isMenuActive
-      ? "bg-gray-700 text-white"
-      : "text-gray-400 hover:bg-gray-800 hover:text-white"
+      ? "bg-emerald-900 text-white"
+      : "text-gray-400 hover:bg-emerald-600 hover:text-white"
   }
 `}
                 >
@@ -230,7 +229,7 @@ className={`flex items-center gap-3 px-4 py-3 rounded-xl transition-all ${
       closeSidebar();
     }
   }}
-  className="block px-3 py-2 rounded-lg text-sm transition-all text-gray-400 hover:bg-gray-800 hover:text-white"
+  className="block px-3 py-2 rounded-lg text-sm transition-all text-gray-400 hover:bg-emerald-900 hover:text-white"
 >
   {subMenu.name}
 </Link>

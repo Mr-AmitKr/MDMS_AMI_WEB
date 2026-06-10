@@ -1,9 +1,8 @@
-import React from "react";
 import { FaEye } from "react-icons/fa";
-import { MdRefresh , MdAnalytics , MdOutlineErrorOutline  } from "react-icons/md";  
+import { MdRefresh, MdAnalytics, MdOutlineErrorOutline , MdKeyboardArrowRight } from "react-icons/md";
 import { GrValidate } from "react-icons/gr";
 import { IoMdWifi } from "react-icons/io";
-
+import { LuClockAlert } from "react-icons/lu";
 const meterData = [
   {
     id: 1,
@@ -45,78 +44,251 @@ const meterData = [
 ];
 
 const MeterMaster = () => {
+  const percentage = 90;
+
+  const radius = 45;
+  const circumference = 2 * Math.PI * radius;
+  const offset = circumference - (percentage / 100) * circumference;
+
+  const getColor = (percentage) => {
+    if (percentage >= 90) return "#22c55e"; // Green
+    if (percentage >= 70) return "#f59e0b"; // Yellow
+    return "#ef4444"; // Red
+  };
+
+  const strokeColor = getColor(percentage);
   return (
-    <div className="pt-35 p-4 md:p-6">
-      <h1 className="text-white text-2xl font-semibold mb-6">
-        Meter Master
-      </h1>
-        <div>
-          {/* Recent Meter Installations */}
-             <div className="flex items-center gap-12">
-               <div className=" shadow-emerald-900 shadow-[0_0_10px] space-x-1 w-70 h-100 bg-[#1c1e27] border-b border-gray-800 p-1 rounded-2xl mb-8 px-4 py-4">
-                  <h1 className="text-gray-300 tracking-wider flex items-center gap-2 justify-center  text-[28px] font-bold mb-4"><MdOutlineErrorOutline className="text-gray-400 text-7xl" />Recent Meter Installations</h1>
-                  <div className=" flex items-center border-b-1 border-gray-700 gap-4 mb-6">
-                    <h4 className=" text-gray-400 font-extralight tracking-widest text-[13px] " >METER ID</h4>
-                    <h2 className="text-white text-[20px] items-center gap-2 tracking-widest font-bold">{meterData[0].id}</h2>
-                  </div>
-                  <div className=" flex items-center border-b-1 border-gray-700 gap-4 mb-6">
-                    <h4 className=" text-gray-400 font-extralight tracking-widest text-[13px] " >Install Date</h4>
-                    <h2 className="text-white text-[20px] items-center gap-2 tracking-widest font-bold">{meterData[0].regDate}</h2>
-                  </div>
-                   <div className=" flex items-center border-b-1 border-gray-700 gap-4 mb-6">
-                    <h4 className=" text-gray-400 font-extralight tracking-widest text-[13px] " >Install Time</h4>
-                    <h2 className="text-white text-[20px] items-center gap-2 tracking-widest font-bold">{meterData[0].regTime}</h2>
-                  </div>
-                   <div className=" flex items-center border-b-1 border-gray-700 gap-4 mb-6">
-                    <h4 className=" text-gray-400 font-extralight tracking-widest text-[13px] " >Location</h4>
-                    <h2 className="text-white text-[20px] items-center gap-2 tracking-widest font-bold">{meterData[0].location}</h2>
-                  </div>
+    <div className="pt-25 p-4 md:p-6">
+      <h1 className="text-white text-2xl font-semibold mb-6">Meter Master</h1>
+      <div className="w-full h-full">
+
+        {/* Recent Meter Installations */}
+        <div className="grid grid-cols-1 md:grid-cols-4 2xl:grid-cols-8 gap-6">
+          <div className=" shadow-emerald-900 shadow-[0_0_10px] space-x-1 w-full min-h-[400px] bg-[#1c1e27] border-b border-gray-800 p-1 rounded-2xl mb-8 px-4 py-4">
+            <h1 className="text-gray-300 tracking-wider flex items-center gap-2 justify-center  text-[28px] font-bold mb-4">
+              <MdOutlineErrorOutline className="text-gray-400 text-7xl" />
+              Recent Meter Installations
+            </h1>
+            <div className=" flex items-center border-b-1 border-gray-700 gap-4 mb-6">
+              <h4 className=" text-gray-400 font-extralight tracking-widest text-[13px] ">
+                METER ID
+              </h4>
+              <h2 className="text-white text-[20px] items-center gap-2 tracking-widest font-bold">
+                {meterData[0].id}
+              </h2>
+            </div>
+            <div className=" flex items-center border-b-1 border-gray-700 gap-4 mb-6">
+              <h4 className=" text-gray-400 font-extralight tracking-widest text-[13px] ">
+                Install Date
+              </h4>
+              <h2 className="text-white text-[20px] items-center gap-2 tracking-widest font-bold">
+                {meterData[0].regDate}
+              </h2>
+            </div>
+            <div className=" flex items-center border-b-1 border-gray-700 gap-4 mb-6">
+              <h4 className=" text-gray-400 font-extralight tracking-widest text-[13px] ">
+                Install Time
+              </h4>
+              <h2 className="text-white text-[20px] items-center gap-2 tracking-widest font-bold">
+                {meterData[0].regTime}
+              </h2>
+            </div>
+            <div className=" flex items-center border-b-1 border-gray-700 gap-4 mb-6">
+              <h4 className=" text-gray-400 font-extralight tracking-widest text-[13px] ">
+                Location
+              </h4>
+              <h2 className="text-white text-[20px] items-center gap-2 tracking-widest font-bold">
+                {meterData[0].location}
+              </h2>
+            </div>
           </div>
           {/* Quick Stats */}
-            <div className=" shadow-emerald-900 shadow-[0_0_10px] space-x-1 w-70 h-100 bg-[#1c1e27] border-b border-gray-800 p-1 rounded-2xl mb-8 px-4 py-4">
-                 <h1 className="text-gray-300 tracking-wider flex items-center gap-2 justify-center  text-[35px] font-bold mb-4"><MdAnalytics className="text-green-500 text-2xl" />Quick Stats</h1>
-           
-            <div className="flex items-center justify-center gap-6">
-               <div className="flex flex-col justify-center gap-2 shadow-xl/80 bg-[#232429] w-30 h-40 rounded-2xl border border-gray-800 p-1 rounded-t-lg">
-                <h4 className="text-gray-400 w-10 font-extralight tracking-wider flex justify-center ml-2 text-[12px] gap-2" >DAILY USE</h4>
-                <h2 className="text-white text-4xl font-extrabold tracking-wider ml-2">24.5</h2>
-                <h4 className="text-gray-400 w-10 font-extralight tracking-wider flex justify-center ml-2 text-[16px] gap-2" >kWh</h4>
-            </div>
-            <div className="flex flex-col justify-center gap-2 shadow-xl/80 bg-[#232429] w-30 h-40 rounded-2xl border border-gray-800 p-1 rounded-t-lg">
-                <h4 className="text-gray-400 w-10 font-extralight tracking-wider flex justify-center ml-5 text-[12px] gap-2" >MONTHLY</h4>
-                <h2 className="text-white text-4xl font-extrabold tracking-wider ml-2">24.5</h2>
-                <h4 className="text-gray-400 w-10 font-extralight tracking-wider flex justify-center ml-2 text-[16px] gap-2" >kWh</h4>
-            </div>
-            </div>
+          <div className=" shadow-emerald-900 shadow-[0_0_10px] space-x-1 w-full min-h-[400px] bg-[#1c1e27] border-b border-gray-800 p-1 rounded-2xl mb-8 px-4 py-4">
+            <h1 className="text-gray-300 tracking-wider flex items-center gap-2 justify-center  text-[35px] font-bold mb-4">
+              <MdAnalytics className="text-green-500 text-2xl" />
+              Quick Stats
+            </h1>
 
-                <div className=" space-x-1 w-60 h-20 mt-8 shadow-xl/80 bg-[#232429] border border-gray-800 p-1 rounded-2xl mb-4 px-4 py-4">
-                    <div>
-                       <h4 className="text-gray-400 font-extralight tracking-widest flex mb-2 ml-2 text-[13px] gap-2" >VALIDATION STATUS</h4>
-                       <h2 className="text-gray-200 flex items-center gap-2 tracking-widest font-bold"><GrValidate className="text-green-500 text-2xl" />VEE Validated</h2>
-                    </div>
-                </div>  
-             </div>
-             {/*Communication Section */}
-             <div className=" shadow-emerald-900 shadow-[0_0_10px] space-x-1 w-70 h-100 bg-[#1c1e27] border-b border-gray-800 p-1 rounded-2xl mb-8 px-4 py-4">
-                 <h1 className="text-gray-300 tracking-wider flex items-center gap-2 justify-center  text-[26px] font-bold mb-4"><IoMdWifi className="text-green-500 text-7xl" />Communication</h1>
-           
             <div className="flex items-center justify-center gap-6">
-               <div className="flex flex-col justify-center gap-2 shadow-xl/80 bg-[#232429] w-30 h-40 rounded-2xl border border-gray-800 p-1 rounded-t-lg">
-                <h4 className="text-gray-400 w-10 font-extralight tracking-wider flex justify-center ml-6 text-[12px] gap-2" >SIGNAL STRENGTH</h4>
-                <h2 className="text-white text-4xl font-extrabold tracking-wider ml-2">-64</h2>
-                <h4 className="text-gray-400 w-10 font-extralight tracking-wider flex justify-center ml-2 text-[16px] gap-2" >dBm</h4>
-            </div>
-            <div className="flex flex-col justify-center gap-2 shadow-xl/80 bg-[#232429] w-30 h-40 rounded-2xl border border-gray-800 p-1 rounded-t-lg">
-                <h4 className="text-gray-400 w-10 font-extralight tracking-wider flex justify-center ml-5 text-[12px] gap-2" >RETRIES (24hr)</h4>
-                <h2 className="text-white text-4xl font-extrabold tracking-wider ml-2">12</h2>
-            </div>
-            </div> 
-             </div>
-
+              <div className="flex flex-col justify-center gap-2 shadow-xl/80 bg-[#232429] w-30 h-40 rounded-2xl border border-gray-800 p-1 rounded-t-lg">
+                <h4 className="text-gray-400 w-10 font-extralight tracking-wider flex justify-center ml-2 text-[12px] gap-2">
+                  DAILY USE
+                </h4>
+                <h2 className="text-white text-4xl font-extrabold tracking-wider ml-2">
+                  24.5
+                </h2>
+                <h4 className="text-gray-400 w-10 font-extralight tracking-wider flex justify-center ml-2 text-[16px] gap-2">
+                  kWh
+                </h4>
               </div>
+              <div className="flex flex-col justify-center gap-2 shadow-xl/80 bg-[#232429] w-30 h-40 rounded-2xl border border-gray-800 p-1 rounded-t-lg">
+                <h4 className="text-gray-400 w-10 font-extralight tracking-wider flex justify-center ml-5 text-[12px] gap-2">
+                  MONTHLY
+                </h4>
+                <h2 className="text-white text-4xl font-extrabold tracking-wider ml-2">
+                  24.5
+                </h2>
+                <h4 className="text-gray-400 w-10 font-extralight tracking-wider flex justify-center ml-2 text-[16px] gap-2">
+                  kWh
+                </h4>
+              </div>
+            </div>
 
-             {/* Table Section */}
+            <div className=" space-x-1 w-60 h-20 mt-8 shadow-xl/80 bg-[#232429] border border-gray-800 p-1 rounded-2xl mb-4 px-4 py-4">
+              <div>
+                <h4 className="text-gray-400 font-extralight tracking-widest flex mb-2 ml-2 text-[13px] gap-2">
+                  VALIDATION STATUS
+                </h4>
+                <h2 className="text-gray-200 flex items-center gap-2 tracking-widest font-bold">
+                  <GrValidate className="text-green-500 text-2xl" />
+                  VEE Validated
+                </h2>
+              </div>
+            </div>
           </div>
+          {/*Communication Section */}
+          <div className=" shadow-emerald-900 shadow-[0_0_10px] space-x-1 w-full min-h-[400px] bg-[#1c1e27] border-b border-gray-800 p-1 rounded-2xl mb-8 px-4 py-4">
+            <h1 className="text-gray-300 tracking-wider flex items-center gap-2 justify-center  text-[26px] font-bold mb-4">
+              <IoMdWifi className="text-green-500 text-4xl" />
+              Communication
+            </h1>
+            <div className="">
+              <h3 className="text-gray-400 ">99.8 %</h3>
+            </div>
+            <div className="border-3 rounded-3xl mb-4 border-green-600 shadow-emerald-700 shadow-[0_0_10px]"></div>
+            <div className="grid grid-cols-2 gap-4 mt-8">
+              <div className="flex flex-col justify-center gap-2 shadow-xl/80 bg-[#232429] w-full h-36 rounded-2xl border border-gray-800 p-1 rounded-t-lg">
+                <h4 className="text-gray-400 w-10 font-extralight tracking-wider flex justify-center ml-6 text-[12px] gap-2">
+                  SIGNAL STRENGTH
+                </h4>
+                <h2 className="text-white text-4xl font-extrabold tracking-wider ml-2">
+                  -64
+                </h2>
+                <h4 className="text-gray-400 w-10 font-extralight tracking-wider flex justify-center ml-2 text-[16px] gap-2">
+                  dBm
+                </h4>
+              </div>
+              <div className="flex flex-col justify-center gap-2 shadow-xl/80 bg-[#232429] w-full h-36 rounded-2xl border border-gray-800 p-1 rounded-t-lg">
+                <h4 className="text-gray-400 w-10 font-extralight tracking-wider flex justify-center ml-5 text-[12px] gap-2">
+                  RETRIES (24hr)
+                </h4>
+                <h2 className="text-white text-4xl font-extrabold tracking-wider ml-2">
+                  12
+                </h2>
+              </div>
+            </div>
+          </div>
+
+          <div className="w-full xl:w-auto flex flex-col gap-2">
+            {/* Optimal Status */}
+            <div className="border border-gray-800 rounded-2xl bg-[#232429] shadow-emerald-700 shadow-[0_0_10px] p-4 flex flex-col sm:flex-row items-center justify-between gap-4">
+              <div> 
+                <h3 className="text-gray-400 font-extralight tracking-widest text-[13px] gap-2">
+                  METER HEALTH
+                </h3>
+                <h2 className="text-gray-300 text-3xl font-bold tracking-wider">
+                  Optimal Status
+                </h2>
+              </div>
+              <div className="relative w-28 h-28 md:w-32 md:h-32 mt-[-20px]">
+                <svg
+                  className="w-full h-full -rotate-90"
+                  viewBox="0 0 100 100 "
+                >
+                  {/* Background Circle */}
+                  <circle
+                    cx="50"
+                    cy="50"
+                    r={radius}
+                    fill="none"
+                    stroke="#1f2937"
+                    strokeWidth="8"
+                  />
+
+                  {/* Progress Circle */}
+                  <circle
+                    cx="50"
+                    cy="50"
+                    r={radius}
+                    fill="none"
+                    stroke={strokeColor}
+                    strokeWidth="8"
+                    strokeLinecap="round"
+                    strokeDasharray={circumference}
+                    strokeDashoffset={offset}
+                    className="drop-shadow-[0_0_0px_rgba(34,197,94,0.8)] transition-all duration-700"
+                  />
+                </svg>
+
+                {/* Percentage */}
+                <div className="absolute inset-0 flex flex-col items-center justify-center">
+                  <span className="text-2xl font-bold text-green-400">
+                    {percentage}%
+                  </span>
+                </div>
+              </div>
+            </div>
+            <div className="border border-gray-800 w-full min-h-[270px] rounded-2xl bg-[#232429] shadow-emerald-700 shadow-[0_0_10px] mt-5 ">
+                  <div className="flex gap-2 justify-between px-6 py-4">
+                      <LuClockAlert className="text-2xl text-yellow-600"/>
+                      <h1 className="text-gray-400 font-bold tracking-widest text-[18px] gap-2">
+                        Event Log
+                        </h1>
+                        <button className="px-3 py-1 text-sm text-emerald-400 rounded hover:text-emerald-600 hover:cursor-pointer transition-colors">
+                          View All
+                        </button>
+                  </div>
+                  <div>
+                    <ul className="px-6 py-2 space-y-3">
+                     
+                      <li className="flex  items-center gap-4 justify-center hover:bg-gray-800 hover:rounded-2xl">
+                         <span className="w-3 h-3 bg-red-500 rounded-full shadow-lg drop-shadow-[0_0_10px_rgba(239,68,68,0.8)]" />
+                          <div className="flex flex-col ">  
+                        <span className="text-gray-300 text-[16px] font-bold">Meter Tamper Alert</span>
+                          <p className="text-gray-500 text-[14px] font-light">Jun 09 , 19:00:00</p>
+                          </div>
+                          <button className="text-2xl text-gray-400 hover:text-gray-200 transition-colors hover:cursor-pointer">
+                          <MdKeyboardArrowRight />
+                          </button>
+                      </li>
+                       <li className="flex  items-center gap-4 justify-center hover:bg-gray-800 hover:rounded-2xl">
+                         <span className="w-3 h-3 bg-yellow-500 rounded-full shadow-lg drop-shadow-[0_0_10px_rgba(234,179,8,0.8)]" />
+                          <div className="flex flex-col ">  
+                        <span className="text-gray-300 text-[16px] font-bold">Clock Synchronized</span>
+                          <p className="text-gray-500 text-[14px] font-light">Jun 09 , 19:00:00</p>
+                          </div>
+                          <button className="text-2xl text-gray-400 hover:text-gray-200 transition-colors hover:cursor-pointer">
+                          <MdKeyboardArrowRight />
+                          </button>
+                      </li>
+                      <li className="flex  items-center gap-4 justify-center hover:bg-gray-800 hover:rounded-2xl">
+                         <span className="w-3 h-3 bg-yellow-500 rounded-full shadow-lg drop-shadow-[0_0_10px_rgba(234,179,8,0.8)]" />
+                          <div className="flex flex-col ">  
+                        <span className="text-gray-300 text-[16px] font-bold">Threshold Breach</span>
+                          <p className="text-gray-500 text-[14px] font-light">Jun 09 , 19:00:00</p>
+                          </div>
+                          <button className="text-2xl text-gray-400 hover:text-gray-200 transition-colors hover:cursor-pointer">
+                          <MdKeyboardArrowRight />
+                          </button>
+                      </li>
+                       <li className="flex  items-center gap-4 justify-center hover:bg-gray-800 hover:rounded-2xl">
+                         <span className="w-3 h-3 bg-green-500 rounded-full shadow-lg drop-shadow-[0_0_10px_rgba(34,197,190,0.8)]" />
+                          <div className="flex flex-col ">  
+                        <span className="text-gray-300 text-[16px] font-bold">Daily Load Sync</span>
+                          <p className="text-gray-500 text-[14px] font-light">Jun 09 , 19:00:00</p>
+                          </div>
+                          <button className="text-2xl text-gray-400 hover:text-gray-200 transition-colors hover:cursor-pointer">
+                          <MdKeyboardArrowRight />
+                          </button>
+                      </li>
+                    </ul>
+                  </div>
+            </div>    
+          </div>
+        </div>
+        </div>
+        {/* Table Section */}
+      
       <div className="bg-[#1c1e27] border border-gray-800 rounded-lg p-5 shadow-md">
         {/* Top Controls */}
         <div className="flex justify-between items-center mb-4 flex-wrap gap-3 text-sm text-gray-300">
@@ -181,20 +353,12 @@ const MeterMaster = () => {
                   <td className="px-4 py-3 text-center">{item.regDate}</td>
                   <td className="px-4 py-3 text-center">{item.regTime}</td>
                   <td className="px-4 py-3 text-center">{item.manf}</td>
-                  <td className="px-4 py-3 text-center">
-                    {item.meterType}
-                  </td>
+                  <td className="px-4 py-3 text-center">{item.meterType}</td>
                   <td className="px-4 py-3 text-center">{item.model}</td>
                   <td className="px-4 py-3 text-center">{item.year}</td>
-                  <td className="px-4 py-3 text-center">
-                    {item.serialNo}
-                  </td>
-                  <td className="px-4 py-3 text-center">
-                    ********
-                  </td>
-                  <td className="px-4 py-3 text-center">
-                    {item.utility}
-                  </td>
+                  <td className="px-4 py-3 text-center">{item.serialNo}</td>
+                  <td className="px-4 py-3 text-center">********</td>
+                  <td className="px-4 py-3 text-center">{item.utility}</td>
 
                   <td className="px-4 py-3 text-center">
                     <span
@@ -208,9 +372,7 @@ const MeterMaster = () => {
                     </span>
                   </td>
 
-                  <td className="px-4 py-3 text-center">
-                    View/Edit
-                  </td>
+                  <td className="px-4 py-3 text-center">View/Edit</td>
 
                   <td className="px-4 py-3 text-center">
                     <span className="inline-block w-3 h-3 bg-red-500 rounded-full" />
@@ -218,8 +380,14 @@ const MeterMaster = () => {
 
                   <td className="px-4 py-3">
                     <div className="flex justify-center gap-3">
-                     <FaEye className="text-blue-400 cursor-pointer" size={18} />
-<MdRefresh className="text-yellow-400 cursor-pointer" size={18} />
+                      <FaEye
+                        className="text-blue-400 cursor-pointer"
+                        size={18}
+                      />
+                      <MdRefresh
+                        className="text-yellow-400 cursor-pointer"
+                        size={18}
+                      />
                     </div>
                   </td>
                 </tr>
@@ -237,13 +405,9 @@ const MeterMaster = () => {
               Previous
             </button>
 
-            <button className="px-4 py-2 bg-blue-600 text-white">
-              1
-            </button>
+            <button className="px-4 py-2 bg-blue-600 text-white">1</button>
 
-            <button className="px-4 py-2 text-black">
-              Next
-            </button>
+            <button className="px-4 py-2 text-black">Next</button>
           </div>
         </div>
       </div>

@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { FaEye } from "react-icons/fa";
 import { IoRefresh } from "react-icons/io5";
 
-const MeterAutoRegistration = () => {
+const MeterRegistrationDetails = () => {
   const [deviceId, setDeviceId] = useState("");
   const [deviceType, setDeviceType] = useState("");
   const [status, setStatus] = useState("");
@@ -101,7 +101,7 @@ const [search, setSearch] = useState("");
   return (
     <div className="w-full min-h-screen p-5 text-white">
       <h1 className="text-2xl font-semibold mb-6">
-        Meter Auto-Registration
+        Meter Registration-Details
       </h1>
 
       {/* Summary Cards */}
@@ -371,4 +371,4 @@ const [search, setSearch] = useState("");
   );
 };
 
-export default MeterAutoRegistration;
+export default MeterRegistrationDetails;
